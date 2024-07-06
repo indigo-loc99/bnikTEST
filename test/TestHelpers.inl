@@ -1,0 +1,6 @@
+#ifndef BNIK_TEST_HELPERS_INL
+#define BNIK_TEST_HELPERS_INL
+
+
+
+#endif // BNIK_TEST_HELPERS_INL

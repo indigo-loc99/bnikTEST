@@ -46,9 +46,6 @@ if(BNIK_TEST_USE_LIBDSTRING_CXX_MODULES)
 endif()
 
 
-#target_include_directories(test_suite01 PRIVATE SYSTEM C:/llvm-project-p/out/install/win-libcxx-zlib-x64/include/c++/v1/)
-
-#target_link_libraries(test_suite01 "D:/llvm-project-p/out/install/win-libcxx-rt/lib/libc++.lib")
 target_link_libraries(test_suite01 dstring GTest::gtest_main)
 target_link_libraries(dummy_prog dstring)
 gtest_discover_tests(test_suite01)

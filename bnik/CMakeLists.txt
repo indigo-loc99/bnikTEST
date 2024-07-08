@@ -34,11 +34,11 @@ if(BNIK_ENABLE_BNIK_CXX_MODULES AND BNIK_CAN_BUILD_AS_CXX_MODULES)
                      TYPE CXX_MODULES 
                      BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}"
                      FILES dstring.ixx
-                   PRIVATE FILE_SET bnik_m_dstring_headers
+                   PUBLIC FILE_SET bnik_m_dstring_headers
                      TYPE HEADERS
                      FILES dstring.hpp config.hpp
                 )
-  target_sources(dstring_cxx_module PRIVATE dstring.hpp config.hpp)
+  #target_sources(dstring_cxx_module PRIVATE dstring.hpp config.hpp)
 #[[
   target_sources(dstring PUBLIC
                    FILE_SET bnik_dstring_headers

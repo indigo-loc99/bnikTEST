@@ -10,7 +10,6 @@ if(BNIK_ENABLE_BNIK_CXX_MODULES)
   add_library(dstring_cxx_module)
   set_target_properties(dstring_cxx_module PROPERTIES OUTPUT_NAME dstring)
   target_compile_features(dstring_cxx_module PUBLIC cxx_std_23)
-  #set(BNIK_TARGETS_PROPAGATE_TYPE PUBLIC)
 else()
 endif()
 
@@ -18,8 +17,7 @@ endif()
 target_sources(dstring PUBLIC
                  FILE_SET bnik_dstring_headers
                  TYPE HEADERS 
-                 #BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}"
-                 FILES dstring.hpp config.hpp
+                 FILES dstring.hpp config.hpp common_defs.hpp
               )
 target_include_directories(dstring INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>" "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
@@ -38,14 +36,6 @@ if(BNIK_ENABLE_BNIK_CXX_MODULES AND BNIK_CAN_BUILD_AS_CXX_MODULES)
                      TYPE HEADERS
                      FILES dstring.hpp config.hpp common_defs.hpp
                 )
-  #target_sources(dstring_cxx_module PRIVATE dstring.hpp config.hpp)
-#[[
-  target_sources(dstring PUBLIC
-                   FILE_SET bnik_dstring_headers
-                   TYPE HEADERS 
-                   FILES dstring.hpp config.hpp common_defs.hpp
-                )
-]]
   set_target_properties(dstring_cxx_module PROPERTIES VERSION "${bnik_VERSION_MAJOR}.${bnik_VERSION_MINOR}.8" SOVERSION 0 INTERFACE_bnik_VERSION_MAJOR_MINOR "${bnik_VERSION_MAJOR}.${bnik_VERSION_MINOR}")
   set_property(TARGET dstring_cxx_module APPEND PROPERTY COMPATIBLE_INTERFACE_STRING bnik_VERSION_MAJOR_MINOR)
   target_compile_definitions(dstring_cxx_module PUBLIC BNIK_HAS_STD_ALLOCATE_AT_LEAST=$<BOOL:${BNIK_HAS_STD_ALLOCATE_AT_LEAST}>)
@@ -68,13 +58,10 @@ endif()
 
 
 
-
-#[[
 install(TARGETS dstring
        EXPORT bnik_targets
        FILE_SET bnik_dstring_headers DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/bnik"
 )
-]]
 
 if(BNIK_ENABLE_BNIK_CXX_MODULES)
   install(TARGETS dstring_cxx_module
@@ -105,5 +92,3 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/bnikConfig.cmake" "${CMAKE_CURRENT_BI
 export(EXPORT bnik_targets FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/bnikTargets.cmake" NAMESPACE bnik::)
 
 
-
-# TODO: Add tests and install targets if needed.
